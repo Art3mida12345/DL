@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
+import moment = require('moment');
 import { BY_STUDENTS } from './intervals';
 
 @Component({
@@ -17,29 +18,8 @@ export class HomePage {
     step: 30 as Step,
     currentDate: new Date(),
     dateFormatter: {
-      formatMonthViewDay: function (date: Date) {
-        return date.getDate().toString();
-      },
-      formatMonthViewDayHeader: function (date: Date) {
-        return 'MonMH';
-      },
-      formatMonthViewTitle: function (date: Date) {
-        return 'testMT';
-      },
-      formatWeekViewDayHeader: function (date: Date) {
-        return 'MonWH';
-      },
-      formatWeekViewTitle: function (date: Date) {
-        return 'testWT';
-      },
       formatWeekViewHourColumn: function (date: Date) {
-        return 'testWH';
-      },
-      formatDayViewHourColumn: function (date: Date) {
-        return 'testDH';
-      },
-      formatDayViewTitle: function (date: Date) {
-        return 'testDT';
+        return moment(date).format('hh');
       },
     },
   };
@@ -92,13 +72,8 @@ export class HomePage {
   }
 
   createRandomEvents() {
-    var events = BY_STUDENTS.map((date) => ({
-      ...date,
-      allDay: false,
-      startTime: new Date(date.start),
-      endTime: new Date(date.end),
-    }));
-
+    var events = BY_STUDENTS;
+    console.log(JSON.stringify(events));
     return events;
   }
 

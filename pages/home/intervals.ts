@@ -1,15 +1,15 @@
 import moment = require('moment');
 
 const STUDENTS = [
-  'Student 1',
-  'Student 2',
-  'Student 3',
-  'Student 4',
-  'Student 5',
-  'Student 6',
-  'Student 7',
-  'Student 8',
-  'Student 9',
+  'Cт1',
+  'Cт2',
+  'Cт3',
+  'Cт4',
+  'Cт5',
+  'Cт6',
+  'Cт7',
+  'Cт8',
+  'Cт9',
 ];
 
 interface Availability {
@@ -33,65 +33,69 @@ const colors: any = {
 };
 
 interface CalendarEvent {
-  start: Date;
-  end: Date;
+  startTime: Date;
+  endTime: Date;
   title: string;
-  color: {};
   allDay: boolean;
-  resizable: {
-    beforeStart: boolean;
-    afterEnd: boolean;
-  };
-  draggable: boolean;
 }
 
 moment.locale('UAH');
-const DATE_BASE = moment().startOf('week').add(2, 'day').startOf('day');
+const DATE_BASE = moment().startOf('week').add(1, 'day').set('hours', 0);
 console.log(DATE_BASE);
 
 const STUDENTS_AVAILABILITY: { [key: string]: Availability[] } = {
   [STUDENTS[0]]: [
     {
       start: '07:00',
-      end: '9:45',
-      dayOfWeek: 1,
+      end: '09:45',
+      dayOfWeek: 0,
     },
     {
       start: '13:00',
       end: '14:00',
-      dayOfWeek: 1,
+      dayOfWeek: 0,
     },
     {
       start: '19:00',
       end: '20:45',
-      dayOfWeek: 1,
+      dayOfWeek: 0,
     },
     {
       start: '07:00',
-      end: '9:45',
-      dayOfWeek: 2,
+      end: '09:45',
+      dayOfWeek: 1,
     },
     {
       start: '12:00',
       end: '15:00',
+      dayOfWeek: 1,
+    },
+    {
+      start: '18:00',
+      end: '20:00',
       dayOfWeek: 2,
     },
     {
       start: '18:00',
       end: '20:00',
-      dayOfWeek: 3,
+      dayOfWeek: 2,
     },
     {
-      start: '18:00',
+      start: '07:00',
+      end: '10:00',
+      dayOfWeek: 5,
+    },
+    {
+      start: '17:00',
       end: '20:00',
-      dayOfWeek: 3,
+      dayOfWeek: 6,
     },
   ],
   [STUDENTS[1]]: [
     {
       start: '07:00',
-      end: '9:45',
-      dayOfWeek: 1,
+      end: '09:45',
+      dayOfWeek: 0,
     },
   ],
   [STUDENTS[2]]: [],
@@ -108,21 +112,17 @@ export const BY_STUDENTS: CalendarEvent[] = STUDENTS.reduce(
     prev.push(
       ...STUDENTS_AVAILABILITY[cur]?.map((item) => ({
         title: cur,
-        start: DATE_BASE.set('weekday', item.dayOfWeek)
-          .set('hour', +item.start.split(':')[0])
-          .set('minute', +item.start.split(':')[1])
+        startTime: moment(DATE_BASE)
+          .add(item.dayOfWeek, 'days')
+          .add(item.start.split(':')[0], 'hours')
+          .add(item.start.split(':')[1], 'minutes')
           .toDate(),
-        end: DATE_BASE.set('weekday', item.dayOfWeek)
-          .set('hour', +item.end.split(':')[0])
-          .set('minute', +item.end.split(':')[1])
+        endTime: moment(DATE_BASE)
+          .add(item.dayOfWeek, 'days')
+          .add(item.end.split(':')[0], 'hours')
+          .add(item.end.split(':')[1], 'minutes')
           .toDate(),
-        color: colors.red,
         allDay: false,
-        resizable: {
-          beforeStart: false,
-          afterEnd: false,
-        },
-        draggable: false,
       }))
     );
 
