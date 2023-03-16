@@ -18,6 +18,9 @@ export class HomePage {
     step: 30 as Step,
     currentDate: new Date(),
     dateFormatter: {
+      formatWeekViewDayColumn: function (date: Date) {
+        return moment(date).format('dd');
+      },
       formatWeekViewHourColumn: function (date: Date) {
         return moment(date).format('hh');
       },
