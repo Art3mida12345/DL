@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
+import { BY_STUDENTS } from './intervals';
 
 @Component({
   selector: 'page-home',
@@ -91,80 +92,7 @@ export class HomePage {
   }
 
   createRandomEvents() {
-    var events = [
-      {
-        title: 'Student 1',
-        start: '2023-03-13T05:00:00.000Z',
-        end: '2023-03-13T07:45:00.000Z',
-        color: { primary: '#ad2121', secondary: '#FAE3E3' },
-        allDay: false,
-        resizable: { beforeStart: false, afterEnd: false },
-        draggable: false,
-      },
-      {
-        title: 'Student 1',
-        start: '2023-03-13T11:00:00.000Z',
-        end: '2023-03-13T12:00:00.000Z',
-        color: { primary: '#ad2121', secondary: '#FAE3E3' },
-        allDay: false,
-        resizable: { beforeStart: false, afterEnd: false },
-        draggable: false,
-      },
-      {
-        title: 'Student 1',
-        start: '2023-03-13T17:00:00.000Z',
-        end: '2023-03-13T18:45:00.000Z',
-        color: { primary: '#ad2121', secondary: '#FAE3E3' },
-        allDay: false,
-        resizable: { beforeStart: false, afterEnd: false },
-        draggable: false,
-      },
-      {
-        title: 'Student 1',
-        start: '2023-03-14T05:00:00.000Z',
-        end: '2023-03-14T07:45:00.000Z',
-        color: { primary: '#ad2121', secondary: '#FAE3E3' },
-        allDay: false,
-        resizable: { beforeStart: false, afterEnd: false },
-        draggable: false,
-      },
-      {
-        title: 'Student 1',
-        start: '2023-03-14T10:00:00.000Z',
-        end: '2023-03-14T13:00:00.000Z',
-        color: { primary: '#ad2121', secondary: '#FAE3E3' },
-        allDay: false,
-        resizable: { beforeStart: false, afterEnd: false },
-        draggable: false,
-      },
-      {
-        title: 'Student 1',
-        start: '2023-03-15T16:00:00.000Z',
-        end: '2023-03-15T18:00:00.000Z',
-        color: { primary: '#ad2121', secondary: '#FAE3E3' },
-        allDay: false,
-        resizable: { beforeStart: false, afterEnd: false },
-        draggable: false,
-      },
-      {
-        title: 'Student 1',
-        start: '2023-03-15T16:00:00.000Z',
-        end: '2023-03-15T18:00:00.000Z',
-        color: { primary: '#ad2121', secondary: '#FAE3E3' },
-        allDay: false,
-        resizable: { beforeStart: false, afterEnd: false },
-        draggable: false,
-      },
-      {
-        title: 'Student 2',
-        start: '2023-03-13T05:00:00.000Z',
-        end: '2023-03-13T07:45:00.000Z',
-        color: { primary: '#ad2121', secondary: '#FAE3E3' },
-        allDay: false,
-        resizable: { beforeStart: false, afterEnd: false },
-        draggable: false,
-      },
-    ].map((date) => ({
+    var events = BY_STUDENTS.map((date) => ({
       ...date,
       allDay: false,
       startTime: new Date(date.start),

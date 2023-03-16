@@ -15,7 +15,7 @@ const STUDENTS = [
 interface Availability {
   start: string;
   end: string;
-  dayOfWeek: DayOfWeek;
+  dayOfWeek: number;
 }
 const colors: any = {
   red: {
@@ -103,7 +103,7 @@ const STUDENTS_AVAILABILITY: { [key: string]: Availability[] } = {
   [STUDENTS[8]]: [],
 };
 
-const BY_STUDENTS: CalendarEvent[] = STUDENTS.reduce(
+export const BY_STUDENTS: CalendarEvent[] = STUDENTS.reduce(
   (prev: CalendarEvent[], cur: string) => {
     prev.push(
       ...STUDENTS_AVAILABILITY[cur]?.map((item) => ({
