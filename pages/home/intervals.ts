@@ -601,12 +601,19 @@ BY_STUDENTS.forEach((ast) => {
       (start1 >= start2 && start1 <= end2) ||
       (start2 >= start1 && start2 <= end1)
     ) {
-      result.push({
-        title: ast.title,
-        startTime: moment.max(start1, start2).toDate(),
-        endTime: moment.min(end1, end2).toDate(),
-        allDay: false,
-      });
+      const resultStart = moment.max(start1, start2);
+      const resultEnd = moment.min(end1, end2);
+
+      if (!resultStart.isSame(resultEnd)) {
+        result.push({
+          title: ast.title,
+          startTime: resultStart.toDate(),
+          endTime: resultEnd.toDate(),
+          allDay: false,
+        });
+      } else {
+        console.log(resultStart, resultEnd);
+      }
     }
   });
 
