@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
 import moment = require('moment');
-import { BY_STUDENTS } from './intervals';
+import { BY_STUDENTS, FILTRED_BY_TEACHER } from './intervals';
 
 @Component({
   selector: 'page-home',
@@ -22,7 +22,7 @@ export class HomePage {
         return moment(date).format('dd');
       },
       formatWeekViewHourColumn: function (date: Date) {
-        return moment(date).format('hh');
+        return moment(date).format('HH');
       },
     },
   };
@@ -75,7 +75,8 @@ export class HomePage {
   }
 
   createRandomEvents() {
-    var events = BY_STUDENTS;
+    var events = FILTRED_BY_TEACHER;
+    //BY_STUDENTS;
     console.log(JSON.stringify(events));
     return events;
   }
