@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
 import moment = require('moment');
-import { BY_STUDENTS, FILTRED_BY_TEACHER } from './intervals';
+import { BY_STUDENTS, FILTRED_BY_TEACHER, MERGED_INTERVALS } from './intervals';
 
 @Component({
   selector: 'page-home',
@@ -75,8 +75,17 @@ export class HomePage {
   }
 
   createRandomEvents() {
-    var events = FILTRED_BY_TEACHER;
-    //BY_STUDENTS;
+    var events = this.get()
+      .sort((e) => e.count)
+      .map((e) => ({
+        startTime: e.startTime,
+        endTime: e.endTime,
+        allDay: false,
+        title: e.count.toString(),
+      }));
+
+    // FILTRED_BY_TEACHER;
+    // BY_STUDENTS;
     console.log(JSON.stringify(events));
     return events;
   }
@@ -92,4 +101,35 @@ export class HomePage {
     current.setHours(0, 0, 0);
     return date < current;
   };
+
+  get() {
+    const sorted = FILTRED_BY_TEACHER.sort((a, b) =>
+      moment
+        .max(moment(a.endTime), moment(b.endTime))
+        .diff(moment.min(moment(a.startTime), moment(b.startTime)), 'minutes')
+    ).map((itv) => ({
+      ...itv,
+      startTime: moment(itv.startTime),
+      endTime: moment(itv.endTime),
+      count: 0,
+    }));
+    let j = 0;
+
+    for (let i = 1; i < sorted.length; i++) {
+      if (sorted[j].endTime > sorted[i].startTime) {
+        sorted[j].endTime = moment.max(sorted[j].endTime, sorted[i].endTime);
+        sorted[j].startTime = moment.min(
+          sorted[j].startTime,
+          sorted[i].startTime
+        );
+        sorted[j].count++;
+        console.log(sorted);
+      } else {
+        j++;
+        sorted[j] = sorted[i];
+      }
+    }
+
+    return sorted;
+  }
 }

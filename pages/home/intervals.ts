@@ -1,4 +1,5 @@
 import moment = require('moment');
+import { count } from 'rxjs/operator/count';
 
 const STUDENTS = [
   'Cт1',
@@ -20,7 +21,7 @@ interface Availability {
   dayOfWeek: number;
 }
 
-interface CalendarEvent {
+export interface CalendarEvent {
   startTime: Date;
   endTime: Date;
   title: string;
@@ -604,7 +605,10 @@ BY_STUDENTS.forEach((ast) => {
       const resultStart = moment.max(start1, start2);
       const resultEnd = moment.min(end1, end2);
 
-      if (!resultStart.isSame(resultEnd)) {
+      if (
+        !resultStart.isSame(resultEnd) &&
+        resultEnd.diff(resultStart, 'minutes') >= 45
+      ) {
         result.push({
           title: ast.title,
           startTime: resultStart.toDate(),
