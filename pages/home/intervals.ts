@@ -5,12 +5,12 @@ const STUDENTS = [
   'Cт1',
   'Cт2',
   'Cт3',
-  'Cт4',
+  /*'Cт4',
   'Cт5',
-  'Cт6',
-  'Cт7',
+  'Cт6',*/
+  /*'Cт7',
   'Cт8',
-  'Cт9',
+  'Cт9',*/
 ];
 
 const TEACHERS = ['В1'];
@@ -154,7 +154,7 @@ const STUDENTS_AVAILABILITY: { [key: string]: Availability[] } = {
       dayOfWeek: 6,
     },
   ],
-  [STUDENTS[3]]: [
+  /*[STUDENTS[3]]: [
     {
       start: '06:00',
       end: '11:00',
@@ -475,7 +475,7 @@ const STUDENTS_AVAILABILITY: { [key: string]: Availability[] } = {
       end: '18:00',
       dayOfWeek: 6,
     },
-  ],
+  ],*/
 };
 
 const TEACHER_AVAILABILITY: { [key: string]: Availability[] } = {
@@ -625,3 +625,270 @@ BY_STUDENTS.forEach((ast) => {
 });
 export const FILTRED_BY_TEACHER = result;
 console.log(JSON.stringify(FILTRED_BY_TEACHER));
+
+export const RES_SCHEDULE = [
+  // COURSE 3
+  {
+    title: 'К-3',
+    startTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(9, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(9, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-3',
+    startTime: moment(DATE_BASE)
+      .add(2, 'days')
+      .add(19, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(2, 'days')
+      .add(19, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-3',
+    startTime: moment(DATE_BASE)
+      .add(3, 'days')
+      .add(8, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(3, 'days')
+      .add(8, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-3',
+    startTime: moment(DATE_BASE)
+      .add(5, 'days')
+      .add(19, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(5, 'days')
+      .add(19, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+
+  // 2
+  {
+    title: 'К-2',
+    startTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(10, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(10, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-2',
+    startTime: moment(DATE_BASE)
+      .add(2, 'days')
+      .add(20, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(20, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-2',
+    startTime: moment(DATE_BASE)
+      .add(3, 'days')
+      .add(20, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(3, 'days')
+      .add(20, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  // 1
+  {
+    title: 'К-1',
+    startTime: moment(DATE_BASE)
+      .add(1, 'days')
+      .add(7, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(7, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-1',
+    startTime: moment(DATE_BASE)
+      .add(5, 'days')
+      .add(9, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(5, 'days')
+      .add(9, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+];
+
+export const FIXED_SCHEDULE = [
+  // COURSE 3
+  {
+    title: 'К-3',
+    startTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(18, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(18, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-3',
+    startTime: moment(DATE_BASE)
+      .add(1, 'days')
+      .add(18, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(1, 'days')
+      .add(18, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-3',
+    startTime: moment(DATE_BASE)
+      .add(3, 'days')
+      .add(18, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(3, 'days')
+      .add(18, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-3',
+    startTime: moment(DATE_BASE)
+      .add(4, 'days')
+      .add(18, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(4, 'days')
+      .add(18, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+
+  // 2
+  {
+    title: 'К-2',
+    startTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(17, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(17, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-2',
+    startTime: moment(DATE_BASE)
+      .add(2, 'days')
+      .add(17, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(0, 'days')
+      .add(17, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-2',
+    startTime: moment(DATE_BASE)
+      .add(4, 'days')
+      .add(17, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(4, 'days')
+      .add(17, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+
+  // 1
+  {
+    title: 'К-1',
+    startTime: moment(DATE_BASE)
+      .add(5, 'days')
+      .add(12, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(5, 'days')
+      .add(12, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+  {
+    title: 'К-1',
+    startTime: moment(DATE_BASE)
+      .add(6, 'days')
+      .add(12, 'hours')
+      .add(0, 'minutes')
+      .toDate(),
+    endTime: moment(DATE_BASE)
+      .add(6, 'days')
+      .add(12, 'hours')
+      .add(45, 'minutes')
+      .toDate(),
+    allDay: false,
+  },
+];
