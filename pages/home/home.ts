@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
 import moment = require('moment');
-import { BY_STUDENTS, FILTRED_BY_TEACHER, MERGED_INTERVALS } from './intervals';
+import { FILTRED_BY_TEACHER } from './intervals';
 
 @Component({
   selector: 'page-home',
@@ -75,14 +75,13 @@ export class HomePage {
   }
 
   createRandomEvents() {
-    var events = this.get()
-      .sort((e) => e.count)
-      .map((e) => ({
-        startTime: e.startTime,
-        endTime: e.endTime,
-        allDay: false,
-        title: e.count.toString(),
-      }));
+    var events = this.get().map((e) => ({
+      //FILTRED_BY_TEACHER;
+      title: e.count.toString(),
+      startTime: e.startTime.toDate(),
+      endTime: e.endTime.toDate(),
+      allDay: false,
+    }));
 
     // FILTRED_BY_TEACHER;
     // BY_STUDENTS;
@@ -103,33 +102,51 @@ export class HomePage {
   };
 
   get() {
-    const sorted = FILTRED_BY_TEACHER.sort((a, b) =>
-      moment
-        .max(moment(a.endTime), moment(b.endTime))
-        .diff(moment.min(moment(a.startTime), moment(b.startTime)), 'minutes')
-    ).map((itv) => ({
+    const sorted = FILTRED_BY_TEACHER.map((itv) => ({
       ...itv,
       startTime: moment(itv.startTime),
       endTime: moment(itv.endTime),
-      count: 0,
+      count: 1,
     }));
-    let j = 0;
 
-    for (let i = 1; i < sorted.length; i++) {
-      if (sorted[j].endTime > sorted[i].startTime) {
-        sorted[j].endTime = moment.max(sorted[j].endTime, sorted[i].endTime);
-        sorted[j].startTime = moment.min(
-          sorted[j].startTime,
-          sorted[i].startTime
-        );
-        sorted[j].count++;
-        console.log(sorted);
-      } else {
-        j++;
-        sorted[j] = sorted[i];
+    // merge
+    for (let j = 0; j < sorted.length - 1; j++) {
+      for (let i = j + 1; i < sorted.length; i++) {
+        if (
+          (sorted[i].startTime >= sorted[j].startTime &&
+            sorted[i].startTime <= sorted[j].endTime) ||
+          (sorted[j].startTime >= sorted[i].startTime &&
+            sorted[j].startTime <= sorted[i].endTime)
+        ) {
+          sorted[j].count++;
+        }
       }
     }
 
-    return sorted;
+    const result = [];
+    // remove duplicates
+    for (let j = 0; j < sorted.length; j++) {
+      const items = sorted
+        .slice(j + 1, sorted.length)
+        .filter(
+          (p) =>
+            p.startTime.isSame(sorted[j].startTime) &&
+            p.endTime.isSame(sorted[j].endTime)
+        );
+      const itemCount = sorted
+        .filter(
+          (p) =>
+            p.startTime.isSame(sorted[j].startTime) &&
+            p.endTime.isSame(sorted[j].endTime)
+        )
+        .sort((a) => a.count);
+
+      if (items.length === 0) {
+        sorted[j].count = itemCount[0].count;
+        result.push(sorted[j]);
+      }
+    }
+
+    return result;
   }
 }
