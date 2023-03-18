@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
 import moment = require('moment');
-import { FILTRED_BY_TEACHER, FIXED_SCHEDULE, RES_SCHEDULE } from './intervals';
+import {
+  FILTRED_BY_TEACHER,
+  FIXED_SCHEDULE,
+  RES_SCHEDULE,
+  RES_SCHEDULE_NEW,
+} from './intervals';
 
 @Component({
   selector: 'page-home',
@@ -75,7 +80,8 @@ export class HomePage {
   }
 
   createRandomEvents() {
-    var events = FIXED_SCHEDULE;
+    var events = RES_SCHEDULE_NEW;
+    //FIXED_SCHEDULE;
     //RES_SCHEDULE;
     /*this.get().map((e) => ({
       //FILTRED_BY_TEACHER;
